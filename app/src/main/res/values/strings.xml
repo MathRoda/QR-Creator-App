@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">QR Creator</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="link_text_paste">Paste Your Link Here ...</string>
+    <string name="facebook_paste">Paste your facebook</string>
+    <string name="qr_creator">QR CREATOR</string>
+    <string name="generate">Generate</string>
+    <string name="cleared">Cleared</string>
+    <string name="your_qr_code_has_been_generated">Your QR Code Has Been Generated</string>
+    <string name="link_text">Link / Text</string>
+    <string name="save_qr">Save QR to Gallery</string>
+
+    <string-array name="menu">
+    <item>Link / Text</item>
+    <item>Facebook</item>
+    <item>Instagram</item>
+    </string-array>
+
+</resources>
