@@ -83,7 +83,6 @@ class HomeFragment : Fragment() {
         binding.generate.isClickable = false
         binding.titleTextview.animate().alpha(0f).duration = 400L
         binding.generate.animate().alpha(0f).duration = 400L
-
         binding.plainText.animate()
             .alpha(0f)
             .translationXBy(1200f)
@@ -118,7 +117,7 @@ class HomeFragment : Fragment() {
 
 
 
-    // this function triggered to navigate to the next fragment
+    // this function triggered when navigate to next fragment
     private fun navigateToSuccess() {
         val direction = HomeFragmentDirections.actionHomeFragmentToSuccessFragment()
         findNavController().navigate(direction)

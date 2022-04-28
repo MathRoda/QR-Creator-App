@@ -10,7 +10,7 @@
     tools:context=".ui.SuccessFragment">
 
 
-    <View
+    <RelativeLayout
         android:id="@+id/view"
         android:layout_width="220dp"
         android:layout_height="210dp"
@@ -49,15 +49,17 @@
         tools:text="@string/your_qr_code_has_been_generated" />
 
     <Button
-        android:id="@+id/saveQR"
+        android:id="@+id/shareQR"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:text="@string/save_qr"
+        android:text="@string/share_qr"
         android:backgroundTint="@color/blue"
         android:textStyle="bold"
         android:textSize="16sp"
+        android:paddingStart="30dp"
+        app:icon="@drawable/ic_share"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

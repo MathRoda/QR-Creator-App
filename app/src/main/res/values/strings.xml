@@ -8,7 +8,7 @@
     <string name="cleared">Cleared</string>
     <string name="your_qr_code_has_been_generated">Your QR Code Has Been Generated</string>
     <string name="link_text">Link / Text</string>
-    <string name="save_qr">Save QR to Gallery</string>
+    <string name="share_qr">Share QR Code</string>
 
     <string-array name="menu">
     <item>Link / Text</item>
