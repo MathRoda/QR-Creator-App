@@ -1,7 +1,9 @@
 package com.example.qrcreator.ui
 
+import android.annotation.SuppressLint
 import android.nfc.Tag
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.*
 import android.widget.AdapterView
@@ -20,6 +22,7 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+private const val URL_REQUEST = "https://api.qrserver.com/v1/create-qr-code/?size=500x500&data="
 
 class HomeFragment : Fragment() {
 
@@ -35,12 +38,24 @@ class HomeFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
+
         binding.generate.setOnClickListener {
+
             val qrGeneratedText = binding.plainText.text.toString()
             viewModel.setTextQR(qrGeneratedText)
             onGenerateClicked()
         }
+
+
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        instagramRequest()
+        facebookRequest()
+        linkAndTextRequest()
+
     }
 
 
@@ -56,20 +71,13 @@ class HomeFragment : Fragment() {
         return true
     }
 
-    override fun onResume() {
-        super.onResume()
-        val dropDownMenu = resources.getStringArray(R.array.menu)
-        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.drop_down_menu, dropDownMenu)
-        binding.autoComplete.setAdapter(arrayAdapter)
-
-    }
 
 
     // this function triggered when the generate button is clicked
     private fun onGenerateClicked() {
         lifecycleScope.launch {
             if(binding.plainText.text.isEmpty())  {
-                showSnackBar("There is no Link Pasted !")
+                showSnackBar("Please fill the text box !")
             }else {
                 applyAnimations()
                 navigateToSuccess()
@@ -84,6 +92,18 @@ class HomeFragment : Fragment() {
         binding.titleTextview.animate().alpha(0f).duration = 400L
         binding.generate.animate().alpha(0f).duration = 400L
         binding.plainText.animate()
+            .alpha(0f)
+            .translationXBy(1200f)
+            .duration = 400L
+        binding.linkText.animate()
+            .alpha(0f)
+            .translationXBy(1200f)
+            .duration = 400L
+        binding.facebook.animate()
+            .alpha(0f)
+            .translationXBy(1200f)
+            .duration = 400L
+        binding.instagram.animate()
             .alpha(0f)
             .translationXBy(1200f)
             .duration = 400L
@@ -114,6 +134,38 @@ class HomeFragment : Fragment() {
         snackBar.setActionTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
         snackBar.show()
     }
+
+    private fun instagramRequest() {
+        binding.instagram.setOnClickListener {
+            binding.plainText.hint = "Please fill in your @  "
+            viewModel.setUrlQR(URL_REQUEST + "instagram://user?username=")
+            binding.instagram.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.teal_200))
+            binding.facebook.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.white))
+            binding.linkText.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.white))
+
+        }
+    }
+
+    private fun linkAndTextRequest() {
+        binding.linkText.setOnClickListener {
+            binding.plainText.setHint(R.string.link_text_paste)
+            viewModel.setUrlQR(URL_REQUEST)
+            binding.linkText.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.teal_200))
+            binding.facebook.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.white))
+            binding.instagram.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.white))
+        }
+    }
+
+    private fun facebookRequest() {
+        binding.facebook.setOnClickListener {
+            binding.plainText.hint= "Please fill in the Facebook ID"
+            viewModel.setUrlQR(URL_REQUEST+ "fb://profile/")
+            binding.facebook.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.teal_200))
+            binding.linkText.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.white))
+            binding.instagram.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.white))
+        }
+    }
+
 
 
 

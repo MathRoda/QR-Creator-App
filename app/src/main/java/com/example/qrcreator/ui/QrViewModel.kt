@@ -2,28 +2,37 @@ package com.example.qrcreator.ui
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.util.Log
+import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import coil.ImageLoader
-import coil.load
 import coil.request.ImageRequest
 import coil.request.SuccessResult
 import com.example.qrcreator.R
 import java.io.File
 import java.io.FileOutputStream
 
+
+
 class QrViewModel: ViewModel() {
+
 
     // Livedata variables to store the input from user and share it with fragments
     private var _textQR = MutableLiveData<String?>("")
     val textQR: LiveData<String?> = _textQR
+
+    private var _urlRequest = MutableLiveData<String?>("")
+    val urlRequest: LiveData<String?> = _urlRequest
 
 
     // a setter function that take input value, store it in ViewModel variable
@@ -31,13 +40,18 @@ class QrViewModel: ViewModel() {
         _textQR.value = text
     }
 
+    fun setUrlQR(text: String?) {
+        _urlRequest.value = text
+    }
+
+
 
 
     // this function uses Coil to send request to QR generator api and form it into bitmap
     suspend fun generateQrCode( text: String?, context: Context): Bitmap {
         val loading = ImageLoader(context)
         val request = ImageRequest.Builder(context)
-            .data("https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=$text")
+            .data(_urlRequest.value + text)
             .placeholder(R.drawable.loading_animation)
             .error(R.drawable.ic_connection_error)
             .crossfade(true)
@@ -79,7 +93,8 @@ class QrViewModel: ViewModel() {
     }
 
 
-    private fun showToast(message: String, context: Context) {
+
+     private fun showToast(message: String, context: Context) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 

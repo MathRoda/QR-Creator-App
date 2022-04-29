@@ -24,59 +24,82 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearVertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="40dp"
-        app:boxBackgroundColor="@color/dark_blue"
-        app:boxStrokeColor="@color/teal_200"
-        app:endIconTint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_textview"
-        app:startIconDrawable="@drawable/ic_link"
-        app:startIconTint="@color/teal_200">
+        android:layout_marginEnd="32dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/title_textview"
+        app:layout_constraintStart_toStartOf="@+id/title_textview"
+        app:layout_constraintTop_toBottomOf="@+id/title_textview">
 
-        <AutoCompleteTextView
-            android:id="@+id/autoComplete"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none"
-            android:labelFor="@id/textInputLayout"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:text="@string/link_text"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="60dp"
+            android:orientation="horizontal">
 
+
+            <ImageButton
+                android:id="@+id/link_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark"
+                android:src="@drawable/ic_add_link"
+                tools:ignore="SpeakableTextPresentCheck"
+                app:tint="@color/teal_200" />
+
+            <ImageButton
+                android:id="@+id/facebook"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark"
+                android:src="@drawable/ic_facebook"
+                tools:ignore="SpeakableTextPresentCheck"
+                app:tint="@color/white"/>
+
+            <ImageButton
+                android:id="@+id/instagram"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark"
+                android:src="@drawable/ic_instagram"
+                tools:ignore="SpeakableTextPresentCheck"
+                app:tint="@color/white"/>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <EditText
         android:id="@+id/plainText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="40dp"
         android:background="@color/dark_blue"
+        android:ems="10"
         android:gravity="start|top"
         android:hint="@string/link_text_paste"
         android:inputType="textMultiLine"
-        android:ems="10"
         android:lines="6"
         android:maxLines="6"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp"
         android:paddingTop="16dp"
+        android:paddingEnd="16dp"
         android:textColor="@color/white"
         android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/linearVertical"
         tools:ignore="TextContrastCheck" />
 
 
@@ -116,7 +139,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/white" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
