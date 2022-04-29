@@ -37,7 +37,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         setHasOptionsMenu(true)
-
+        viewModel.setUrlQR(URL_REQUEST)
 
         binding.generate.setOnClickListener {
 
