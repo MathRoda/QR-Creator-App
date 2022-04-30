@@ -8,84 +8,36 @@
     android:background="@color/dark"
     tools:context=".ui.HomeFragment">
 
-    <TextView
-        android:id="@+id/title_textview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="140dp"
-        android:layout_marginEnd="60dp"
-        android:text="@string/qr_creator"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="50sp"
-        android:textStyle="bold"
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="196dp"
+        android:layout_height="159dp"
+        android:layout_marginTop="70dp"
+        android:src="@drawable/ic_qr_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/linearVertical"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/title_textview"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:orientation="vertical"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/title_textview"
-        app:layout_constraintStart_toStartOf="@+id/title_textview"
-        app:layout_constraintTop_toBottomOf="@+id/title_textview">
+        android:layout_marginTop="8dp"
+        android:text="@string/qr_creator"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icon" />
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:orientation="horizontal">
-
-
-            <ImageButton
-                android:id="@+id/link_text"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:backgroundTint="@color/dark"
-                android:src="@drawable/ic_add_link"
-                tools:ignore="SpeakableTextPresentCheck"
-                app:tint="@color/teal_200" />
-
-            <ImageButton
-                android:id="@+id/facebook"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:backgroundTint="@color/dark"
-                android:src="@drawable/ic_facebook"
-                tools:ignore="SpeakableTextPresentCheck"
-                app:tint="@color/white"/>
-
-            <ImageButton
-                android:id="@+id/instagram"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:backgroundTint="@color/dark"
-                android:src="@drawable/ic_instagram"
-                tools:ignore="SpeakableTextPresentCheck"
-                app:tint="@color/white"/>
-
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <EditText
         android:id="@+id/plainText"
-        android:layout_width="0dp"
+        android:layout_width="331dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="40dp"
-        android:background="@color/dark_blue"
+        android:layout_marginTop="62dp"
+        android:background="@drawable/rounded_corners"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/link_text_paste"
@@ -99,23 +51,80 @@
         android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearVertical"
+        app:layout_constraintTop_toBottomOf="@+id/title_textview"
         tools:ignore="TextContrastCheck" />
 
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearVertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plainText">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="horizontal">
+
+
+            <ImageButton
+                android:id="@+id/link_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark"
+                android:src="@drawable/ic_add_link"
+                app:tint="@color/teal_200"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <ImageButton
+                android:id="@+id/facebook"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark"
+                android:src="@drawable/ic_facebook"
+                app:tint="@color/white"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <ImageButton
+                android:id="@+id/instagram"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark"
+                android:src="@drawable/ic_instagram"
+                app:tint="@color/white"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
     <Button
         android:id="@+id/generate"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
         android:backgroundTint="@color/blue"
         android:text="@string/generate"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/plainText"
-        app:layout_constraintStart_toStartOf="@+id/plainText"
-        app:layout_constraintTop_toBottomOf="@+id/plainText" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearVertical" />
 
     <View
         android:id="@+id/SuccessBg"

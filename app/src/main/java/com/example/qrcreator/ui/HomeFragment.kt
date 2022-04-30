@@ -89,6 +89,7 @@ class HomeFragment : Fragment() {
     // this function triggered to create a transition animation between fragments
     private suspend fun applyAnimations() {
         binding.generate.isClickable = false
+        binding.icon.animate().alpha(0f).duration = 400L
         binding.titleTextview.animate().alpha(0f).duration = 400L
         binding.generate.animate().alpha(0f).duration = 400L
         binding.plainText.animate()
