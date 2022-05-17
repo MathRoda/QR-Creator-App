@@ -12,9 +12,9 @@
     <string name="instagram_hint">Drop your @ here : </string>
 
     <string-array name="menu">
-    <item>Link / Text</item>
-    <item>Facebook</item>
-    <item>Instagram</item>
+        <item>Link / Text</item>
+        <item>Facebook</item>
+        <item>Instagram</item>
     </string-array>
 
 </resources>

@@ -39,11 +39,9 @@ class HomeFragment : Fragment() {
         setHasOptionsMenu(true)
         viewModel.setUrlQR(URL_REQUEST)
 
-
-
-
         return binding.root
     }
+
 
     override fun onResume() {
         super.onResume()

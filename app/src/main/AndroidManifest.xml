@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/splashScreenTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".MainActivity" android:theme="@style/AppTheme.ActionBar.Transparent"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
