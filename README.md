@@ -22,7 +22,7 @@
 - Supports navigation control 
 - uses Fragments and viewModel
 - sending an api request using Coil library to return a bitMap
-- Modren layout with splash screen & animations 
+- Modern layout with splash screen & animations 
 - 
 ## You can download the test version [Download](https://github.com/MathRoda/QR-Creator-App/releases/tag/v1.0.0)
 
