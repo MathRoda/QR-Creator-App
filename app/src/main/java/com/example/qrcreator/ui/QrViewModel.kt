@@ -65,38 +65,5 @@ class QrViewModel: ViewModel() {
 
 
 
-    fun getContentUri(imageView: ImageView, context: Context): Uri? {
-
-        //take an imageview parameter turn into bitmap
-        val bitmapDrawable = imageView.drawable as BitmapDrawable
-        val bitmap = bitmapDrawable.bitmap
-
-        //create a folder to store image in permanently
-        val imageFolder = File(context.cacheDir,"images")
-        var contentUri: Uri? = null
-
-        // try to catch when the image is not created
-        try {
-            imageFolder.mkdirs()
-            val file = File(imageFolder, "shared_image.png")
-            val stream = FileOutputStream(file)
-
-            bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream)
-            stream.flush()
-            stream.close()
-            contentUri = FileProvider.getUriForFile(context, context.applicationContext.packageName + ".provider" ,file)
-        }catch (e: Exception) {
-            showToast("${e.message}", context)
-            Log.e("error", e.message.toString())
-        }
-        return contentUri
-    }
-
-
-
-     private fun showToast(message: String, context: Context) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-    }
-
 
 }

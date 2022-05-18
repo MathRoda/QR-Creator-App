@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Scan"
+        android:icon="@drawable/ic_scanner"/>
+
+    <item
+        android:id="@+id/homeFragment"
+        android:title="Create"
+        android:icon="@drawable/ic_create"/>
+
+    <item
+        android:id="@+id/historyFragment"
+        android:title="History"
+        android:icon="@drawable/ic_baseline_history_24"/>
+</menu>

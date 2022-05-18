@@ -3,12 +3,17 @@ package com.example.qrcreator.ui
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
+import androidx.core.content.FileProvider
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import coil.ImageLoader
@@ -16,6 +21,8 @@ import com.example.qrcreator.R
 import com.example.qrcreator.databinding.FragmentSuccessBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
 
 
 class SuccessFragment : Fragment() {
@@ -52,7 +59,7 @@ class SuccessFragment : Fragment() {
 
     // this function start new activity share launcher to share QR code
     private fun shareImage(imageView: ImageView, context: Context) {
-        val contentUri = viewModel.getContentUri(imageView, context)
+        val contentUri = getContentUri(imageView, context)
         val intent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
             flags = Intent.FLAG_ACTIVITY_NEW_TASK
@@ -66,5 +73,35 @@ class SuccessFragment : Fragment() {
     }
 
 
+    private fun getContentUri(imageView: ImageView, context: Context): Uri? {
+
+        //take an imageview parameter turn into bitmap
+        val bitmapDrawable = imageView.drawable as BitmapDrawable
+        val bitmap = bitmapDrawable.bitmap
+
+        //create a folder to store image in permanently
+        val imageFolder = File(context.cacheDir,"images")
+        var contentUri: Uri? = null
+
+        // try to catch when the image is not created
+        try {
+            imageFolder.mkdirs()
+            val file = File(imageFolder, "shared_image.png")
+            val stream = FileOutputStream(file)
+
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream)
+            stream.flush()
+            stream.close()
+            contentUri = FileProvider.getUriForFile(context, context.applicationContext.packageName + ".provider" ,file)
+        }catch (e: Exception) {
+            showToast("${e.message}", context)
+            Log.e("error", e.message.toString())
+        }
+        return contentUri
+    }
+
+    private fun showToast(message: String, context: Context) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
 
 }

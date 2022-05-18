@@ -62,7 +62,9 @@ class HomeFragment : Fragment() {
             val qrGeneratedText = binding.plainText.text.toString()
             viewModel.setTextQR(qrGeneratedText)
             onGenerateClicked()
-            item.isVisible = false
+           if (binding.plainText.text.isNotEmpty()){
+               item.isVisible = false
+           }
         }
         return true
     }

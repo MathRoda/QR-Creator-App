@@ -36,7 +36,7 @@
         android:id="@+id/plainText"
         android:layout_width="331dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="62dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_corners"
         android:ems="10"
         android:gravity="start|top"
