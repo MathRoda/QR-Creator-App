@@ -97,7 +97,6 @@ class HomeFragment : Fragment() {
             .translationXBy(1200f)
             .duration = 400L
 
-
         delay(300)
         binding.SuccessBg.animate().alpha(1f).duration = 600L
         binding.SuccessBg.animate().rotationBy(720f).duration = 600L
@@ -109,6 +108,7 @@ class HomeFragment : Fragment() {
             .duration = 1000L
 
         delay(1500L)
+
 
     }
 
