@@ -1,17 +1,8 @@
-package com.example.qrcreator.ui
+package com.example.qrcreator.viewmodels
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
-import android.net.Uri
-import android.util.Log
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,9 +10,6 @@ import coil.ImageLoader
 import coil.request.ImageRequest
 import coil.request.SuccessResult
 import com.example.qrcreator.R
-import java.io.File
-import java.io.FileOutputStream
-
 
 
 class QrViewModel: ViewModel() {

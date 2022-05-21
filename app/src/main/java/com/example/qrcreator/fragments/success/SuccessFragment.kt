@@ -1,4 +1,4 @@
-package com.example.qrcreator.ui
+package com.example.qrcreator.fragments.success
 
 import android.content.Context
 import android.content.Intent
@@ -16,9 +16,9 @@ import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import coil.ImageLoader
 import com.example.qrcreator.R
 import com.example.qrcreator.databinding.FragmentSuccessBinding
+import com.example.qrcreator.viewmodels.QrViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.File

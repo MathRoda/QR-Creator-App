@@ -1,23 +1,15 @@
-package com.example.qrcreator.ui
+package com.example.qrcreator.fragments.home
 
-import android.annotation.SuppressLint
-import android.nfc.Tag
 import android.os.Bundle
-import android.text.InputType
-import android.util.Log
 import android.view.*
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import coil.load
 import com.example.qrcreator.R
 import com.example.qrcreator.databinding.FragmentHomeBinding
+import com.example.qrcreator.viewmodels.QrViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
