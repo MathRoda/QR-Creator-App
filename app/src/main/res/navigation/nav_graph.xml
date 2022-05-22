@@ -31,5 +31,10 @@
         android:id="@+id/historyFragment"
         android:name="com.example.qrcreator.fragments.history.HistoryFragment"
         android:label="fragment_history"
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/fragment_history" >
+        <argument
+            android:name="currentQR"
+            app:argType="com.example.qrcreator.model.History" />
+    </fragment>
+
 </navigation>

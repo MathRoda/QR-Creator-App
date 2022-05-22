@@ -1,25 +1,39 @@
 package com.example.qrcreator.fragments.home
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextUtils
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import coil.ImageLoader
+import coil.request.ImageRequest
+import coil.request.SuccessResult
 import com.example.qrcreator.R
 import com.example.qrcreator.databinding.FragmentHomeBinding
+import com.example.qrcreator.model.History
+import com.example.qrcreator.viewmodels.DatabaseViewModel
 import com.example.qrcreator.viewmodels.QrViewModel
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 private const val URL_REQUEST = "https://api.qrserver.com/v1/create-qr-code/?size=500x500&data="
 
+@InternalCoroutinesApi
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: QrViewModel by activityViewModels()
+    private lateinit var mDatabaseViewModel: DatabaseViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +42,7 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        mDatabaseViewModel = ViewModelProvider(this)[DatabaseViewModel::class.java]
         setHasOptionsMenu(true)
         viewModel.setUrlQR(URL_REQUEST)
 
@@ -54,6 +69,8 @@ class HomeFragment : Fragment() {
             val qrGeneratedText = binding.plainText.text.toString()
             viewModel.setTextQR(qrGeneratedText)
             onGenerateClicked()
+
+
            if (binding.plainText.text.isNotEmpty()){
                item.isVisible = false
            }
@@ -71,6 +88,7 @@ class HomeFragment : Fragment() {
             }else {
                 applyAnimations()
                 navigateToSuccess()
+                insertDataToDatabase()
 
             }
         }
@@ -157,6 +175,22 @@ class HomeFragment : Fragment() {
 
 
 
+    private fun insertDataToDatabase() {
+        val text = binding.plainText.text.toString()
+
+        if (inputCheck(text)) {
+            lifecycleScope.launch {
+                val history = History(0, text)
+                mDatabaseViewModel.addQrHistory(history)
+            }
+        }
+
+    }
+
+
+    private fun inputCheck(text: String): Boolean {
+        return !(TextUtils.isEmpty(text))
+    }
 
     // this function triggered when navigate to next fragment
     private fun navigateToSuccess() {

@@ -40,7 +40,7 @@ class SuccessFragment : Fragment() {
 
         lifecycleScope.launch {
 
-            val qrText = viewModel.textQR.value
+             val qrText = viewModel.textQR.value
             val bitmapQR = viewModel.generateQrCode( qrText, requireContext())
             binding.imageView.setImageBitmap(bitmapQR)
 

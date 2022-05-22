@@ -77,6 +77,7 @@
 
             <ImageButton
                 android:id="@+id/link_text"
+                android:tag="Link / Text"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -87,6 +88,7 @@
 
             <ImageButton
                 android:id="@+id/facebook"
+                android:tag="Facebook"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -97,6 +99,7 @@
 
             <ImageButton
                 android:id="@+id/instagram"
+                android:tag="Instagram"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
