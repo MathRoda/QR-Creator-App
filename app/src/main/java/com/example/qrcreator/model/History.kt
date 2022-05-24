@@ -2,6 +2,7 @@ package com.example.qrcreator.model
 
 import android.graphics.Bitmap
 import android.os.Parcelable
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
@@ -9,7 +10,12 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Entity(tableName = "history_table")
 data class History (
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    val text: String
-        ): Parcelable
+    @ColumnInfo(name = "text") val text: String,
+    @ColumnInfo(name = "type") val type: String,
+    @ColumnInfo(name = "qr_history") val qrHistory: Bitmap
+        ): Parcelable {
+
+
+      @PrimaryKey(autoGenerate = true)
+          var id: Int = 0
+        }

@@ -25,6 +25,8 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
         fun bind(history: History) {
             text.text = history.text
+            type.text = history.type
+            qrBitmap.load(history.qrHistory)
         }
 
     }

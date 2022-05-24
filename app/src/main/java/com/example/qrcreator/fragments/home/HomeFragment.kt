@@ -1,15 +1,12 @@
 package com.example.qrcreator.fragments.home
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.text.Editable
 import android.text.TextUtils
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -20,19 +17,18 @@ import com.example.qrcreator.R
 import com.example.qrcreator.databinding.FragmentHomeBinding
 import com.example.qrcreator.model.History
 import com.example.qrcreator.viewmodels.DatabaseViewModel
-import com.example.qrcreator.viewmodels.QrViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-private const val URL_REQUEST = "https://api.qrserver.com/v1/create-qr-code/?size=500x500&data="
+private const val URL_REQUEST: String = "https://api.qrserver.com/v1/create-qr-code/?size=500x500&data="
+private var SELECTED_TYPE: String = ""
 
 @InternalCoroutinesApi
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    private val viewModel: QrViewModel by activityViewModels()
     private lateinit var mDatabaseViewModel: DatabaseViewModel
 
     override fun onCreateView(
@@ -44,7 +40,8 @@ class HomeFragment : Fragment() {
 
         mDatabaseViewModel = ViewModelProvider(this)[DatabaseViewModel::class.java]
         setHasOptionsMenu(true)
-        viewModel.setUrlQR(URL_REQUEST)
+        mDatabaseViewModel.setUrlQR(URL_REQUEST)
+        SELECTED_TYPE = binding.linkText.tag.toString()
 
         return binding.root
     }
@@ -67,7 +64,7 @@ class HomeFragment : Fragment() {
         if (item.itemId == R.id.home_menu) {
 
             val qrGeneratedText = binding.plainText.text.toString()
-            viewModel.setTextQR(qrGeneratedText)
+            mDatabaseViewModel.setTextQR(qrGeneratedText)
             onGenerateClicked()
 
 
@@ -86,10 +83,9 @@ class HomeFragment : Fragment() {
             if(binding.plainText.text.isEmpty())  {
                 showSnackBar("Please fill the text box !")
             }else {
+                insertDataToDatabase()
                 applyAnimations()
                 navigateToSuccess()
-                insertDataToDatabase()
-
             }
         }
     }
@@ -142,10 +138,12 @@ class HomeFragment : Fragment() {
         snackBar.show()
     }
 
-    private fun instagramRequest() {
+    private fun instagramRequest(){
         binding.instagram.setOnClickListener {
             binding.plainText.hint = "Please fill in your @  "
-            viewModel.setUrlQR(URL_REQUEST + "instagram://user?username=")
+            binding.plainText.text.clear()
+            SELECTED_TYPE = binding.instagram.tag.toString()
+            mDatabaseViewModel.setUrlQR(URL_REQUEST + "instagram://user?username=")
             binding.instagram.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.teal_200))
             binding.facebook.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.white))
             binding.linkText.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.white))
@@ -156,7 +154,8 @@ class HomeFragment : Fragment() {
     private fun linkAndTextRequest() {
         binding.linkText.setOnClickListener {
             binding.plainText.setHint(R.string.link_text_paste)
-            viewModel.setUrlQR(URL_REQUEST)
+            SELECTED_TYPE = binding.linkText.tag.toString()
+            mDatabaseViewModel.setUrlQR(URL_REQUEST)
             binding.linkText.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.teal_200))
             binding.facebook.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.white))
             binding.instagram.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.white))
@@ -166,7 +165,9 @@ class HomeFragment : Fragment() {
     private fun facebookRequest() {
         binding.facebook.setOnClickListener {
             binding.plainText.hint= "Please fill in the Facebook ID"
-            viewModel.setUrlQR(URL_REQUEST+ "fb://profile/")
+            binding.plainText.text.clear()
+            SELECTED_TYPE = binding.facebook.tag.toString()
+            mDatabaseViewModel.setUrlQR(URL_REQUEST+ "fb://profile/")
             binding.facebook.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.teal_200))
             binding.linkText.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.white))
             binding.instagram.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.white))
@@ -177,14 +178,34 @@ class HomeFragment : Fragment() {
 
     private fun insertDataToDatabase() {
         val text = binding.plainText.text.toString()
+        val insertType = SELECTED_TYPE
 
         if (inputCheck(text)) {
             lifecycleScope.launch {
-                val history = History(0, text)
+                val history = History(text, insertType,  generateQrCode())
                 mDatabaseViewModel.addQrHistory(history)
             }
         }
 
+    }
+
+    private suspend fun generateQrCode( ): Bitmap {
+
+        val urlValue = mDatabaseViewModel.urlRequest.value
+        val inputTextValue = mDatabaseViewModel.textQR.value
+
+        // sending api request through coil to generate a QR bitmap
+        val loading = ImageLoader(requireContext())
+        val request = ImageRequest.Builder(requireContext())
+            .data( urlValue + inputTextValue)
+            .placeholder(R.drawable.loading_animation)
+            .error(R.drawable.ic_connection_error)
+            .crossfade(true)
+            .crossfade(500)
+            .build()
+
+        val result = (loading.execute(request) as SuccessResult).drawable
+        return (result as BitmapDrawable).bitmap
     }
 
 
@@ -194,7 +215,7 @@ class HomeFragment : Fragment() {
 
     // this function triggered when navigate to next fragment
     private fun navigateToSuccess() {
-        val direction = HomeFragmentDirections.actionHomeFragmentToSuccessFragment()
-        findNavController().navigate(direction)
+        //val direction = HomeFragmentDirections.actionHomeFragmentToSuccessFragment()
+        findNavController().navigate(R.id.action_homeFragment_to_successFragment)
     }
 }

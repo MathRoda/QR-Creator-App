@@ -32,8 +32,8 @@ class HistoryFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         mDatabaseViewModel = ViewModelProvider(this)[DatabaseViewModel::class.java]
-        mDatabaseViewModel.readAllData.observe(viewLifecycleOwner, Observer { history ->
-            adapter.setData(history)
+        mDatabaseViewModel.readAllData.observe(viewLifecycleOwner, Observer {
+            adapter.setData(it)
         })
 
         return binding.root

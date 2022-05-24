@@ -14,21 +14,23 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.FileProvider
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
-import com.example.qrcreator.R
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import coil.load
 import com.example.qrcreator.databinding.FragmentSuccessBinding
-import com.example.qrcreator.viewmodels.QrViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.example.qrcreator.model.History
+import com.example.qrcreator.viewmodels.DatabaseViewModel
+import kotlinx.coroutines.InternalCoroutinesApi
 import java.io.File
 import java.io.FileOutputStream
 
 
+@InternalCoroutinesApi
 class SuccessFragment : Fragment() {
 
     private lateinit var binding: FragmentSuccessBinding
-    private val viewModel: QrViewModel by activityViewModels()
+    private lateinit var mDatabaseViewModel: DatabaseViewModel
+    private lateinit var history: History
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,21 +39,26 @@ class SuccessFragment : Fragment() {
         // Inflate the layout for this fragment
        binding=  FragmentSuccessBinding.inflate(inflater, container, false)
 
+       /* mDatabaseViewModel = ViewModelProvider(this)[DatabaseViewModel::class.java]
+        mDatabaseViewModel.getQrHistory(id).observe(viewLifecycleOwner, Observer {
+            binding.imageView.load(it)
+        })*/
 
-        lifecycleScope.launch {
 
-             val qrText = viewModel.textQR.value
+       /* lifecycleScope.launch {
+
+            val qrText = viewModel.textQR.value
             val bitmapQR = viewModel.generateQrCode( qrText, requireContext())
             binding.imageView.setImageBitmap(bitmapQR)
 
             delay(100)
             binding.textView.setText(R.string.your_qr_code_has_been_generated)
-        }
+        }*/
 
-        binding.shareQR.setOnClickListener {
+       /* binding.shareQR.setOnClickListener {
             val imageView = binding.imageView
             shareImage(imageView, requireContext())
-        }
+        }*/
 
         return binding.root
     }
