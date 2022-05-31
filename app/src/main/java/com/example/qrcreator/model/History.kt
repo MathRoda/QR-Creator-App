@@ -12,7 +12,6 @@ import kotlinx.parcelize.Parcelize
 data class History (
     @ColumnInfo(name = "text") val text: String,
     @ColumnInfo(name = "type") val type: String,
-    @ColumnInfo(name = "qr_history") val qrHistory: Bitmap
         ): Parcelable {
 
 

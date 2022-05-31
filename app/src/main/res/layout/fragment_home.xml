@@ -36,7 +36,7 @@
         android:id="@+id/plainText"
         android:layout_width="331dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/rounded_corners"
         android:ems="10"
         android:gravity="start|top"
@@ -135,6 +135,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Clear"
+        android:textColor="@color/blue"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/plainText"
+        app:layout_constraintStart_toStartOf="@+id/plainText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

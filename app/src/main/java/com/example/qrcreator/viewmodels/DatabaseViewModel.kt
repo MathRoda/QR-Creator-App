@@ -28,7 +28,6 @@ class DatabaseViewModel(application: Application): AndroidViewModel(application)
    }
 
 
-
     fun addQrHistory(history: History) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addQrHistory(history)
@@ -39,15 +38,15 @@ class DatabaseViewModel(application: Application): AndroidViewModel(application)
 
 
     // Livedata variables to store the input from user and share it with fragments
-    private var _textQR = MutableLiveData<String?>("")
-    val textQR: LiveData<String?> = _textQR
+    private var _textQR = MutableLiveData("")
+    val textQR: LiveData<String> = _textQR
 
-    private var _urlRequest = MutableLiveData<String?>("")
+    private var _urlRequest = MutableLiveData("")
     val urlRequest: LiveData<String?> = _urlRequest
 
 
     // a setter function that take input value, store it in ViewModel variable
-    fun setTextQR(text: String?) {
+    fun setTextQR(text: String) {
         _textQR.value = text
     }
 

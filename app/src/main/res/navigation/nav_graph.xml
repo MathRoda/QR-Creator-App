@@ -12,23 +12,20 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_successFragment"
-            app:destination="@id/successFragment"
-            app:enterAnim="@anim/from_bottom"
-            app:exitAnim="@anim/to_top"
-            app:popEnterAnim="@anim/from_top"
-            app:popExitAnim="@anim/to_bottom" />
+            app:destination="@id/successFragment" />
     </fragment>
     <fragment
         android:id="@+id/successFragment"
         android:name="com.example.qrcreator.fragments.success.SuccessFragment"
         android:label="QR Generated"
         tools:layout="@layout/fragment_success" >
+        <argument android:name="qrText"
+            app:argType="string" />
+        <argument android:name="qrType"
+            app:argType="string" />
         <action
             android:id="@+id/action_successFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
-        <argument
-            android:name="currentQR"
-            app:argType="com.example.qrcreator.model.History" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
