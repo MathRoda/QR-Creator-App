@@ -6,6 +6,8 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.text.TextUtils
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,14 +15,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidmads.library.qrgenearator.QRGContents
+import androidmads.library.qrgenearator.QRGEncoder
+import androidmads.library.qrgenearator.QRGSaver
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import coil.load
 import com.example.qrcreator.databinding.FragmentSuccessBinding
 import com.example.qrcreator.model.History
 import com.example.qrcreator.viewmodels.DatabaseViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 
@@ -30,7 +39,8 @@ class SuccessFragment : Fragment() {
 
     private lateinit var binding: FragmentSuccessBinding
     private lateinit var mDatabaseViewModel: DatabaseViewModel
-    private lateinit var history: History
+    private val args:SuccessFragmentArgs by navArgs()
+    private val savePath: String = Environment.getExternalStorageDirectory().path + "/QRCode/"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,33 +49,29 @@ class SuccessFragment : Fragment() {
         // Inflate the layout for this fragment
        binding=  FragmentSuccessBinding.inflate(inflater, container, false)
 
-       /* mDatabaseViewModel = ViewModelProvider(this)[DatabaseViewModel::class.java]
-        mDatabaseViewModel.getQrHistory(id).observe(viewLifecycleOwner, Observer {
-            binding.imageView.load(it)
-        })*/
+        val qrImage = binding.imageView
+        mDatabaseViewModel = ViewModelProvider(this)[DatabaseViewModel::class.java]
+
+        val userInput = args.qrText
+        val qrEncoder = QRGEncoder(userInput, null, QRGContents.Type.TEXT, 700)
+        val bitmap = qrEncoder.bitmap
+        qrImage.setImageBitmap(bitmap)
+
+        insertDataToDatabase()
 
 
-       /* lifecycleScope.launch {
+        binding.shareQR.setOnClickListener {
+            shareQr(qrImage, requireContext())
+            //saveQr(savePath, userInput, bitmap )
 
-            val qrText = viewModel.textQR.value
-            val bitmapQR = viewModel.generateQrCode( qrText, requireContext())
-            binding.imageView.setImageBitmap(bitmapQR)
-
-            delay(100)
-            binding.textView.setText(R.string.your_qr_code_has_been_generated)
-        }*/
-
-       /* binding.shareQR.setOnClickListener {
-            val imageView = binding.imageView
-            shareImage(imageView, requireContext())
-        }*/
+        }
 
         return binding.root
     }
 
 
     // this function start new activity share launcher to share QR code
-    private fun shareImage(imageView: ImageView, context: Context) {
+    private fun shareQr(imageView: ImageView, context: Context) {
         val contentUri = getContentUri(imageView, context)
         val intent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
@@ -105,6 +111,45 @@ class SuccessFragment : Fragment() {
             Log.e("error", e.message.toString())
         }
         return contentUri
+    }
+
+    /* private fun saveQr(savePath: String, userInput: String, bitmap: Bitmap) {
+
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                try {
+                    val qrSaver = QRGSaver()
+                    qrSaver.save(savePath, userInput.trim(), bitmap, QRGContents.ImageType.IMAGE_JPEG)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            } else {
+                Toast.makeText(requireContext(),"not available", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
+    } */
+
+
+    private fun insertDataToDatabase() {
+        val text = args.qrText
+        val insertType = args.qrType
+
+        if (inputCheck(text)) {
+            lifecycleScope.launch {
+                val history = History(text, insertType)
+                mDatabaseViewModel.addQrHistory(history)
+            }
+        }
+
+    }
+
+
+    private fun inputCheck(text: String): Boolean {
+        return !(TextUtils.isEmpty(text))
     }
 
     private fun showToast(message: String, context: Context) {

@@ -10,9 +10,8 @@ class HistoryRepository(private val historyDao: HistoryDao) {
 
     val readAllData: LiveData<List<History>> = historyDao.readAllData()
 
-
-
     suspend fun addQrHistory(history: History) {
         historyDao.addQrHistory(history)
     }
+
 }

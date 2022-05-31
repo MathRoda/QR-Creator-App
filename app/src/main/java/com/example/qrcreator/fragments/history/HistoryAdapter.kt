@@ -14,7 +14,7 @@ import com.example.qrcreator.model.History
 class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
 
-    var historyList = emptyList<History>()
+    private var historyList = emptyList<History>()
 
     class ViewHolder(binding: CustomRowBinding): RecyclerView.ViewHolder(binding.root) {
         private val qrBitmap: ImageView = binding.QrBitmap
@@ -26,7 +26,6 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
         fun bind(history: History) {
             text.text = history.text
             type.text = history.type
-            qrBitmap.load(history.qrHistory)
         }
 
     }
