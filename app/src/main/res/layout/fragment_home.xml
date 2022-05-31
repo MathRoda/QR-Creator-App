@@ -140,12 +140,12 @@
         android:id="@+id/clear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
         android:text="Clear"
-        android:textColor="@color/blue"
+        android:textColor="@color/teal_700"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/plainText"
+        app:layout_constraintBottom_toBottomOf="@+id/plainText"
         app:layout_constraintStart_toStartOf="@+id/plainText" />
 
 
