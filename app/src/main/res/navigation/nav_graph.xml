@@ -7,24 +7,53 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.qrcreator.ui.HomeFragment"
+        android:name="com.example.qrcreator.fragments.home.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_successFragment"
-            app:destination="@id/successFragment"
-            app:enterAnim="@anim/from_bottom"
-            app:exitAnim="@anim/to_top"
-            app:popEnterAnim="@anim/from_top"
-            app:popExitAnim="@anim/to_bottom" />
+            app:destination="@id/successFragment" />
     </fragment>
     <fragment
         android:id="@+id/successFragment"
-        android:name="com.example.qrcreator.ui.SuccessFragment"
+        android:name="com.example.qrcreator.fragments.success.SuccessFragment"
         android:label="QR Generated"
         tools:layout="@layout/fragment_success" >
+        <argument android:name="text"
+            app:argType="string" />
+        <argument android:name="qrType"
+            app:argType="string" />
+        <argument android:name="qrText"
+            app:argType="string" />
         <action
             android:id="@+id/action_successFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popEnterAnim="@anim/from_bottom"
+            app:popExitAnim="@anim/to_top" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.qrcreator.fragments.history.HistoryFragment"
+        android:label="History"
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_historyFragment_to_qrFragment"
+            app:destination="@id/qrFragment" />
+        <action
+            android:id="@+id/action_historyFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/qrFragment"
+        android:name="com.example.qrcreator.fragments.qr.QrFragment"
+        android:label="QR History"
+        tools:layout="@layout/fragment_qr" >
+        <action
+            android:id="@+id/action_qrFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+        <argument
+            android:name="currentQR"
+            app:argType="com.example.qrcreator.model.History" />
+    </fragment>
+
 </navigation>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark"
-    tools:context=".ui.HomeFragment">
+    tools:context=".fragments.home.HomeFragment">
 
     <ImageView
         android:id="@+id/icon"
@@ -36,7 +36,7 @@
         android:id="@+id/plainText"
         android:layout_width="331dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="62dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/rounded_corners"
         android:ems="10"
         android:gravity="start|top"
@@ -77,6 +77,7 @@
 
             <ImageButton
                 android:id="@+id/link_text"
+                android:tag="Link / Text"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -87,6 +88,7 @@
 
             <ImageButton
                 android:id="@+id/facebook"
+                android:tag="Facebook"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -97,6 +99,7 @@
 
             <ImageButton
                 android:id="@+id/instagram"
+                android:tag="Instagram"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -109,22 +112,6 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <Button
-        android:id="@+id/generate"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="48dp"
-        android:backgroundTint="@color/blue"
-        android:text="@string/generate"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearVertical" />
 
     <View
         android:id="@+id/SuccessBg"
@@ -148,6 +135,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Clear"
+        android:textColor="@color/teal_700"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/plainText"
+        app:layout_constraintStart_toStartOf="@+id/plainText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
