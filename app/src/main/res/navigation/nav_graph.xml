@@ -19,21 +19,38 @@
         android:name="com.example.qrcreator.fragments.success.SuccessFragment"
         android:label="QR Generated"
         tools:layout="@layout/fragment_success" >
-        <argument android:name="qrText"
+        <argument android:name="text"
             app:argType="string" />
         <argument android:name="qrType"
             app:argType="string" />
-        <argument android:name="qrTextDatabase"
+        <argument android:name="qrText"
             app:argType="string" />
         <action
             android:id="@+id/action_successFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popEnterAnim="@anim/from_bottom"
+            app:popExitAnim="@anim/to_top" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.example.qrcreator.fragments.history.HistoryFragment"
         android:label="History"
         tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_historyFragment_to_qrFragment"
+            app:destination="@id/qrFragment" />
+        <action
+            android:id="@+id/action_historyFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/qrFragment"
+        android:name="com.example.qrcreator.fragments.qr.QrFragment"
+        android:label="QR History"
+        tools:layout="@layout/fragment_qr" >
+        <action
+            android:id="@+id/action_qrFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
         <argument
             android:name="currentQR"
             app:argType="com.example.qrcreator.model.History" />

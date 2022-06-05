@@ -28,7 +28,6 @@ class HomeFragment : Fragment() {
         setHasOptionsMenu(true)
 
         linkAndTextRequest(binding)
-
             binding.clear.setOnClickListener {
                 clearText(binding)
             }
@@ -78,29 +77,25 @@ class HomeFragment : Fragment() {
     // this function triggered when navigate to next fragment
     private fun navigateToSuccess() {
         var qrText = binding.plainText.text.toString()
-        val  qrTextDatabase = qrText
+        val text = qrText
         val qrType: String
 
         when {
             binding.instagram.isActivated -> {
                 qrText = "instagram://user?username=$qrText"
-
-                qrTextDatabase
                 qrType = binding.instagram.tag.toString()
             }
             binding.facebook.isActivated -> {
                 qrText = "fb://profile/$qrText"
-                qrTextDatabase
                 qrType = binding.facebook.tag.toString()
             }
             else -> {
                 qrText = binding.plainText.text.toString()
-                qrTextDatabase
                 qrType = binding.linkText.tag.toString()
             }
         }
 
-        val direction = HomeFragmentDirections.actionHomeFragmentToSuccessFragment(qrText, qrType, qrTextDatabase)
+        val direction = HomeFragmentDirections.actionHomeFragmentToSuccessFragment(text, qrType, qrText)
         findNavController().navigate(direction)
     }
 

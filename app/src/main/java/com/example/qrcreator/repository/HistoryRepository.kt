@@ -14,4 +14,12 @@ class HistoryRepository(private val historyDao: HistoryDao) {
         historyDao.addQrHistory(history)
     }
 
+    suspend fun deleteQrHistory(history: History) {
+        historyDao.deleteQrHistory(history)
+    }
+
+    suspend fun deleteAllHistory() {
+        historyDao.deleteAllHistory()
+    }
+
 }

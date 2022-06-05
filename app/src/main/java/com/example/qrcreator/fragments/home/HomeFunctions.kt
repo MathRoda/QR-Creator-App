@@ -72,7 +72,8 @@ fun HomeFragment.instagramRequest(binding: FragmentHomeBinding) {
              Snackbar.LENGTH_SHORT
          )
          snackBar.setAction("Okay"){}
-         snackBar.setActionTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
+         snackBar.setActionTextColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
+    snackBar.setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.blue))
          snackBar.show()
      }
      

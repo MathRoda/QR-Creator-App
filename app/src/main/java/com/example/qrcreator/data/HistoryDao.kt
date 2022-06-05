@@ -13,11 +13,13 @@ interface HistoryDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addQrHistory(history: History)
 
+    @Delete
+    suspend fun deleteQrHistory(history: History)
+
+    @Query("DELETE FROM history_table")
+    suspend fun deleteAllHistory()
+
     @Query("SELECT * FROM history_table ORDER BY id ASC")
     fun readAllData(): LiveData<List<History>>
-
-    /* @Query("SELECT qr_history FROM history_table WHERE id= :id")
-    fun getQrHistory(id: Int): LiveData<List<History>> */
-
 
 }

@@ -2,14 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="24dp"
-    android:layout_marginBottom="16dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
-    android:background="@drawable/rounded_corners"
+    android:id="@+id/rowLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/rowLayout">
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="16dp"
+    android:background="@drawable/rounded_corners"
+    android:padding="24dp">
 
     <ImageView
         android:id="@+id/QrBitmap"
@@ -27,8 +27,8 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:text="Instagram"
-        android:textSize="20sp"
         android:textColor="@color/white"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/QrBitmap"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,12 +37,12 @@
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:textColor="@color/white"
         android:layout_marginTop="8dp"
-        android:text="yourUsername"
         android:maxLines="1"
+        android:text="yourUsername"
+        android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/QrBitmap"
+        app:layout_constraintStart_toStartOf="@+id/type"
         app:layout_constraintTop_toBottomOf="@+id/type" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

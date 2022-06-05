@@ -34,6 +34,18 @@ class DatabaseViewModel(application: Application): AndroidViewModel(application)
         }
     }
 
+    fun deleteQrHistory(history: History) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteQrHistory(history)
+        }
+    }
+
+    fun deleteAllHistory() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAllHistory()
+        }
+    }
+
 
 
 }

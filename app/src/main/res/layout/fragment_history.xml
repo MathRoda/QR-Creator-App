@@ -19,5 +19,4 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/custom_row" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>

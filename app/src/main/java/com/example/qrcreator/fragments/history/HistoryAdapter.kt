@@ -1,20 +1,22 @@
 package com.example.qrcreator.fragments.history
 
-import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.ListAdapter
+import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.qrcreator.databinding.CustomRowBinding
 import com.example.qrcreator.model.History
+import com.example.qrcreator.viewmodels.DatabaseViewModel
 
 class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
 
     private var historyList = emptyList<History>()
+
 
     class ViewHolder(binding: CustomRowBinding): RecyclerView.ViewHolder(binding.root) {
         private val qrBitmap: ImageView = binding.QrBitmap
@@ -26,6 +28,8 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
         fun bind(history: History) {
             text.text = history.text
             type.text = history.type
+            qrBitmap.load(history.qr)
+
         }
 
     }
@@ -43,6 +47,12 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = historyList[position]
         holder.bind(currentItem)
+
+        holder.rowLayout.setOnClickListener {
+            val action = HistoryFragmentDirections.actionHistoryFragmentToQrFragment(currentItem)
+            holder.itemView.findNavController().navigate(action)
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -53,4 +63,6 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
         this.historyList = history
         notifyDataSetChanged()
     }
+
+
 }
