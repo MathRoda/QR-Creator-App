@@ -2,7 +2,7 @@
 
 ![](https://github.com/MathRoda/QR-Creator-App/blob/master/app/src/main/res/qr_icon.png)
 
-<h1>tool to generate QR codes based on string you given .</h1>
+<h2>tool to generate QR codes based on string you given .</h2>
 
 
 ## Screenshots
@@ -19,6 +19,6 @@
 - uses intent to share generated QRs throughout other apps 
 - Modern layout with splash screen & animations 
 
-## You can download the History feature version here ![Download](https://github.com/MathRoda/QR-Creator-App/releases/tag/v1.1.0)
+## You can download the History version here [Download](https://github.com/MathRoda/QR-Creator-App/releases/tag/v1.1.0)
 
 
