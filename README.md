@@ -2,28 +2,23 @@
 
 ![](https://github.com/MathRoda/QR-Creator-App/blob/master/app/src/main/res/qr_icon.png)
 
-<p>tool to generate QR codes based on string you given .</p>
-
-
-
-
+<h1>tool to generate QR codes based on string you given .</h1>
 
 
 ## Screenshots
-<p float="left">
-  <img src="https://github.com/MathRoda/QR-Creator-App/blob/master/app/src/main/res/screen-shots/splash_screen.png" width="200" />
-  <img src="https://github.com/MathRoda/QR-Creator-App/blob/master/app/src/main/res/screen-shots/main_layout.png" width="200" /> 
-  <img src="https://github.com/MathRoda/QR-Creator-App/blob/master/app/src/main/res/screen-shots/success_animation.png" width="200" />
-  <img src="https://github.com/MathRoda/QR-Creator-App/blob/master/app/src/main/res/screen-shots/qr_layout.png" width="200" />
-</p>
+<img src="https://github.com/MathRoda/QR-Creator-App/blob/master/app/src/main/res/screen-shots/history%20feature%20ss.jpg" width="1000" />
 
 ### Features
 
 - Supports navigation control 
-- uses Fragments and viewModel
-- sending an api request using Coil library to return a bitMap
+- uses bottom navigation to navigate through fragments
+- uses MVVM Architecture 
+- uses QRGenerator library by [Androidmads](https://github.com/androidmads/QRGenerator)  to generate QRs 
+- Integrates ROOM database with MVVM to srore previously generated QRs and data that relate to it 
+- uses MediaStore to save QRs as a JPG to external storage 
+- uses intent to share generated QRs throughout other apps 
 - Modern layout with splash screen & animations 
-- 
-## You can download the test version [Download](https://github.com/MathRoda/QR-Creator-App/releases/tag/v1.0.0)
+
+## You can download the History feature version here ![Download](https://github.com/MathRoda/QR-Creator-App/releases/tag/v1.1.0)
 
 
